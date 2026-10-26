@@ -1,0 +1,7 @@
+category,total_complaints,closed_cases,measured_cases,unmeasurable_cases,avg_resolution_hours
+Mortgage Servicing,31,9,9,0,226.67
+Card or Transaction Dispute,25,4,4,0,270.0
+Service Quality,21,6,6,0,148.0
+Digital Banking,19,4,4,0,198.0
+Fees,15,6,6,0,248.0
+Account Access,9,5,5,0,388.8
