@@ -1,0 +1,17 @@
+Banking database integrity report
+
+Table | Source | Inserted | Rejected | Database delta
+customer | 100 | 100 | 0 | 100
+account | 150 | 150 | 0 | 150
+complaint | 120 | 120 | 0 | 120
+
+Orphan checks:
+account.customer_id -> customer: 0 orphans
+complaint.customer_id -> customer: 0 orphans
+complaint.account_id -> account: 0 orphans
+complaint: 0 account/customer mismatches
+
+STATUS: COMMITTED
+
+Rejected rows (file, line, reason):
+None

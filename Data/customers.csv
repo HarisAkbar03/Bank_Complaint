@@ -1,0 +1,101 @@
+customer_id,first_name,last_name,segment,email
+C0001,Jamie,Clark,Premium,customer1@example.test
+C0002,Taylor,Clark,Small Business,customer2@example.test
+C0003,Jordan,Clark,Premium,customer3@example.test
+C0004,Jordan,Smith,Small Business,customer4@example.test
+C0005,Jamie,Chen,Small Business,customer5@example.test
+C0006,Jordan,Smith,Standard,customer6@example.test
+C0007,Morgan,Smith,Premium,customer7@example.test
+C0008,Jamie,Brown,Small Business,customer8@example.test
+C0009,Casey,Clark,Standard,customer9@example.test
+C0010,Jamie,Wilson,Premium,customer10@example.test
+C0011,Casey,Martin,Standard,customer11@example.test
+C0012,Alex,Patel,Small Business,customer12@example.test
+C0013,Avery,Patel,Premium,customer13@example.test
+C0014,Jordan,Smith,Small Business,customer14@example.test
+C0015,Morgan,Brown,Standard,customer15@example.test
+C0016,Avery,Singh,Premium,customer16@example.test
+C0017,Morgan,Wilson,Premium,customer17@example.test
+C0018,Casey,Martin,Standard,customer18@example.test
+C0019,Jordan,Chen,Standard,customer19@example.test
+C0020,Alex,Smith,Premium,customer20@example.test
+C0021,Taylor,Brown,Premium,customer21@example.test
+C0022,Taylor,Singh,Small Business,customer22@example.test
+C0023,Jordan,Singh,Premium,customer23@example.test
+C0024,Alex,Wilson,Small Business,customer24@example.test
+C0025,Alex,Brown,Standard,customer25@example.test
+C0026,Jordan,Smith,Standard,customer26@example.test
+C0027,Jamie,Wilson,Standard,customer27@example.test
+C0028,Casey,Singh,Standard,customer28@example.test
+C0029,Jordan,Brown,Small Business,customer29@example.test
+C0030,Alex,Martin,Premium,customer30@example.test
+C0031,Taylor,Clark,Small Business,customer31@example.test
+C0032,Avery,Chen,Small Business,customer32@example.test
+C0033,Casey,Brown,Small Business,customer33@example.test
+C0034,Morgan,Chen,Small Business,customer34@example.test
+C0035,Avery,Clark,Small Business,customer35@example.test
+C0036,Avery,Smith,Standard,customer36@example.test
+C0037,Alex,Wilson,Standard,customer37@example.test
+C0038,Casey,Singh,Small Business,customer38@example.test
+C0039,Casey,Chen,Small Business,customer39@example.test
+C0040,Taylor,Brown,Premium,customer40@example.test
+C0041,Casey,Brown,Standard,customer41@example.test
+C0042,Jordan,Wilson,Premium,customer42@example.test
+C0043,Morgan,Smith,Standard,customer43@example.test
+C0044,Casey,Martin,Small Business,customer44@example.test
+C0045,Jordan,Martin,Standard,customer45@example.test
+C0046,Riley,Chen,Small Business,customer46@example.test
+C0047,Alex,Clark,Premium,customer47@example.test
+C0048,Alex,Smith,Small Business,customer48@example.test
+C0049,Jamie,Patel,Small Business,customer49@example.test
+C0050,Riley,Chen,Standard,customer50@example.test
+C0051,Jamie,Martin,Small Business,customer51@example.test
+C0052,Taylor,Martin,Premium,customer52@example.test
+C0053,Jamie,Patel,Premium,customer53@example.test
+C0054,Jamie,Smith,Small Business,customer54@example.test
+C0055,Avery,Smith,Small Business,customer55@example.test
+C0056,Jordan,Patel,Small Business,customer56@example.test
+C0057,Casey,Singh,Small Business,customer57@example.test
+C0058,Avery,Clark,Premium,customer58@example.test
+C0059,Jordan,Smith,Premium,customer59@example.test
+C0060,Jamie,Smith,Standard,customer60@example.test
+C0061,Jamie,Clark,Premium,customer61@example.test
+C0062,Riley,Wilson,Standard,customer62@example.test
+C0063,Taylor,Martin,Small Business,customer63@example.test
+C0064,Jamie,Brown,Premium,customer64@example.test
+C0065,Casey,Brown,Small Business,customer65@example.test
+C0066,Morgan,Brown,Premium,customer66@example.test
+C0067,Riley,Brown,Standard,customer67@example.test
+C0068,Jamie,Martin,Standard,customer68@example.test
+C0069,Casey,Chen,Standard,customer69@example.test
+C0070,Jamie,Wilson,Standard,customer70@example.test
+C0071,Avery,Clark,Small Business,customer71@example.test
+C0072,Jamie,Martin,Standard,customer72@example.test
+C0073,Casey,Smith,Small Business,customer73@example.test
+C0074,Riley,Wilson,Small Business,customer74@example.test
+C0075,Taylor,Singh,Premium,customer75@example.test
+C0076,Alex,Wilson,Standard,customer76@example.test
+C0077,Alex,Patel,Premium,customer77@example.test
+C0078,Riley,Patel,Small Business,customer78@example.test
+C0079,Morgan,Clark,Premium,customer79@example.test
+C0080,Alex,Clark,Small Business,customer80@example.test
+C0081,Taylor,Brown,Premium,customer81@example.test
+C0082,Taylor,Singh,Small Business,customer82@example.test
+C0083,Jordan,Singh,Small Business,customer83@example.test
+C0084,Taylor,Clark,Premium,customer84@example.test
+C0085,Alex,Singh,Small Business,customer85@example.test
+C0086,Jamie,Martin,Small Business,customer86@example.test
+C0087,Jordan,Patel,Standard,customer87@example.test
+C0088,Avery,Patel,Premium,customer88@example.test
+C0089,Casey,Smith,Premium,customer89@example.test
+C0090,Alex,Clark,Premium,customer90@example.test
+C0091,Casey,Clark,Standard,customer91@example.test
+C0092,Jordan,Singh,Standard,customer92@example.test
+C0093,Riley,Chen,Premium,customer93@example.test
+C0094,Jamie,Clark,Small Business,customer94@example.test
+C0095,Morgan,Clark,Small Business,customer95@example.test
+C0096,Taylor,Wilson,Premium,customer96@example.test
+C0097,Morgan,Wilson,Standard,customer97@example.test
+C0098,Jamie,Brown,Premium,customer98@example.test
+C0099,Alex,Singh,Standard,customer99@example.test
+C0100,Avery,Patel,Premium,customer100@example.test
