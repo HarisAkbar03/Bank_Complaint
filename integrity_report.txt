@@ -1,17 +1,10 @@
-Banking database integrity report
 
-Table | Source | Inserted | Rejected | Database delta
-customer | 100 | 100 | 0 | 100
-account | 150 | 150 | 0 | 150
-complaint | 120 | 120 | 0 | 120
+STATUS: ROLLED BACK
+Error: (psycopg.errors.UniqueViolation) duplicate key value violates unique constraint "customer_pkey"
+DETAIL:  Key (customer_id)=(C0001) already exists.
+[SQL: INSERT INTO customer (customer_id, first_name, last_name, email, segment) VALUES (%(customer_id)s::VARCHAR, %(first_name)s::VARCHAR, %(last_name)s::VARCHAR, %(email)s::VARCHAR, %(segment)s::VARCHAR)]
+[parameters: {'customer_id': 'C0001', 'first_name': 'Jamie', 'last_name': 'Clark', 'email': 'customer1@example.test', 'segment': 'Premium'}]
+(Background on this error at: https://sqlalche.me/e/21/gkpj)
 
-Orphan checks:
-account.customer_id -> customer: 0 orphans
-complaint.customer_id -> customer: 0 orphans
-complaint.account_id -> account: 0 orphans
-complaint: 0 account/customer mismatches
-
-STATUS: COMMITTED
-
-Rejected rows (file, line, reason):
+Rejected rows:
 None
