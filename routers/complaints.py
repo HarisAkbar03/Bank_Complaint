@@ -6,7 +6,8 @@ from schemas.api import StatusUpdate, StatusHistoryResponse
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
-
+from repositories.complaint_repository import ComplaintRepository
+from services.complaint_service import ComplaintService
 from dependencies import get_db
 from repositories.models import Customer, Complaint, ComplaintStatus
 from schemas.api import ComplaintCreate, ComplaintResponse
@@ -32,44 +33,64 @@ def get_complaint(
     return complaint
 
 
-@router.post(
-    "",
-    status_code=status.HTTP_201_CREATED
-)
+@router.post("", status_code=201)
 def create_complaint(
     data: ComplaintCreate,
     db: Session = Depends(get_db)
 ):
-
+    # Check that the customer exists
     if db.get(Customer, data.customer_id) is None:
         raise HTTPException(
             status_code=404,
             detail="Customer not found"
         )
 
-    if db.get(Complaint, data.complaint_id) is not None:
-        raise HTTPException(
-            status_code=409,
-            detail="Complaint ID already exists"
-        )
-
+    # Create complaint object
     complaint = Complaint(
         complaint_id=data.complaint_id,
         customer_id=data.customer_id,
         category=data.category,
+        channel=data.channel,
         status=ComplaintStatus.OPEN.value,
         received_at=data.received_at or datetime.now(timezone.utc)
     )
 
+    # Inject the same session into the repository
+    repository = ComplaintRepository(db)
+
+    # Inject the repository into the service
+    service = ComplaintService(repository)
+
     try:
-        db.add(complaint)
+        # Stage both complaint and history
+        service.create_complaint(complaint)
+
+        # Execute both INSERTs, but do not commit yet
+        db.flush()
+
+        # Commit both writes together
         db.commit()
-    except IntegrityError:
+
+    except ValueError as error:
         db.rollback()
         raise HTTPException(
             status_code=409,
-            detail="Complaint could not be created due to a database constraint"
+            detail=str(error)
         )
+
+    except IntegrityError as error:
+        db.rollback()
+
+        print("\nDATABASE ERROR:")
+        print(error.orig)
+
+        raise HTTPException(
+            status_code=409,
+            detail="Database constraint violation"
+        )
+    except Exception:
+        db.rollback()
+        raise
 
     return {
         "message": "Complaint created successfully",

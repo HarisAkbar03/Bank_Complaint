@@ -22,11 +22,11 @@ class ComplaintResponse(BaseModel):
 
 
 class ComplaintCreate(BaseModel):
-    complaint_id: str = Field(min_length=1)
-    customer_id: str = Field(min_length=1)
-    category: str = Field(min_length=1)
+    complaint_id: str
+    customer_id: str
+    category: str
+    channel: str
     received_at: datetime | None = None
-
 
 class StatusUpdate(BaseModel):
     status: str

@@ -61,7 +61,7 @@ class Account(Base):
 
 class Complaint(Base):
     __tablename__ = "complaint"
-
+    channel: Mapped[str] = mapped_column(String, nullable=False)
     complaint_id: Mapped[str] = mapped_column(
         String, primary_key=True
     )
@@ -100,7 +100,7 @@ class ComplaintStatusHistory(Base):
     __tablename__ = "complaint_status_history"
 
     # Unique identifier for each status change
-    id: Mapped[int] = mapped_column(
+    history_id: Mapped[int] = mapped_column(
         Integer,
         primary_key=True,
         autoincrement=True

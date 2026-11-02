@@ -1,52 +1,75 @@
 
-from dataclasses import replace
+from datetime import datetime, timezone
 
-from repositories.models import Complaint, ComplaintStatus
+from repositories.models import (
+    Complaint,
+    ComplaintStatus,
+    ComplaintStatusHistory
+)
 
 
 class ComplaintService:
 
     def __init__(self, complaint_repository):
-        # Dependency injection
+        # Keep dependency injection
         self.repository = complaint_repository
 
     def create_complaint(self, complaint):
-        # Validate the complaint object
+
         if not isinstance(complaint, Complaint):
             raise ValueError("Invalid complaint object")
 
-        # New complaints must start as Open
-        if complaint.status != ComplaintStatus.OPEN:
+        if ComplaintStatus(complaint.status) != ComplaintStatus.OPEN:
             raise ValueError("New complaints must start as Open")
 
-        # Check whether the complaint already exists
         if self.repository.get_by_id(complaint.complaint_id):
             raise ValueError("Complaint already exists")
 
-        # Save through the repository
+        # First database operation
         self.repository.create(complaint)
 
+        # Initial status history event
+        event = ComplaintStatusHistory(
+            complaint_id=complaint.complaint_id,
+            old_status=None,
+            new_status=ComplaintStatus.OPEN.value,
+            changed_at=datetime.now(timezone.utc)
+        )
+
+        # Second database operation
+        self.repository.create_history(event)
+
+        # No commit here
         return complaint
 
     def update_status(self, complaint_id, new_status):
-        # Retrieve the complaint
+
         complaint = self.repository.get_by_id(complaint_id)
 
         if complaint is None:
             raise ValueError("Complaint not found")
 
-        # Convert the requested status to an Enum
         new_status = ComplaintStatus(new_status)
 
-        # Validate the transition
         if not complaint.can_transition_to(new_status):
             raise ValueError("Invalid status transition")
 
-        # Save the new status
+        old_status = ComplaintStatus(complaint.status)
+
+        # Update complaint
         self.repository.update_status(
             complaint_id,
             new_status.value
         )
 
-        # Return a new Complaint object because it is frozen
-        return replace(complaint, status=new_status)
+        # Record the status change
+        event = ComplaintStatusHistory(
+            complaint_id=complaint_id,
+            old_status=old_status.value,
+            new_status=new_status.value,
+            changed_at=datetime.now(timezone.utc)
+        )
+
+        self.repository.create_history(event)
+
+        return complaint
