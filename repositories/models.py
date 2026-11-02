@@ -1,7 +1,11 @@
-from dataclasses import dataclass
 from datetime import datetime
 from decimal import Decimal
 from enum import Enum
+
+from sqlalchemy import String, Numeric, DateTime, ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column
+
+from database import Base
 
 
 class ComplaintStatus(str, Enum):
@@ -25,61 +29,66 @@ VALID_TRANSITIONS = {
 }
 
 
-@dataclass(frozen=True)
-class Customer:
-    customer_id: str
-    first_name: str
-    last_name: str
-    email: str | None
+class Customer(Base):
+    __tablename__ = "customer"
+
+    customer_id: Mapped[str] = mapped_column(
+        String, primary_key=True
+    )
+    first_name: Mapped[str] = mapped_column(String)
+    last_name: Mapped[str] = mapped_column(String)
+    email: Mapped[str | None] = mapped_column(String, nullable=True)
 
 
-@dataclass(frozen=True)
-class Account:
-    account_id: str
-    customer_id: str
-    account_type: str
-    status: AccountStatus
-    current_balance: Decimal | None
+class Account(Base):
+    __tablename__ = "account"
 
-    def __post_init__(self):
-        object.__setattr__(
-            self, "status", AccountStatus(self.status)
-        )
+    account_id: Mapped[str] = mapped_column(
+        String, primary_key=True
+    )
+    customer_id: Mapped[str] = mapped_column(
+        ForeignKey("customer.customer_id")
+    )
+    account_type: Mapped[str] = mapped_column(String)
+    status: Mapped[str] = mapped_column(String)
+    current_balance: Mapped[Decimal | None] = mapped_column(
+        Numeric(12, 2), nullable=True
+    )
 
 
-@dataclass(frozen=True)
-class Complaint:
-    complaint_id: str
-    customer_id: str
-    category: str
-    status: ComplaintStatus
-    received_at: datetime | None
+class Complaint(Base):
+    __tablename__ = "complaint"
 
-    def __post_init__(self):
-        object.__setattr__(
-            self, "status", ComplaintStatus(self.status)
-        )
+    complaint_id: Mapped[str] = mapped_column(
+        String, primary_key=True
+    )
+    customer_id: Mapped[str] = mapped_column(
+        ForeignKey("customer.customer_id")
+    )
+    category: Mapped[str] = mapped_column(String)
+    status: Mapped[str] = mapped_column(String)
+    received_at: Mapped[datetime | None] = mapped_column(
+        DateTime, nullable=True
+    )
 
     def can_transition_to(self, new_status):
-        new_status = ComplaintStatus(new_status)
-        return new_status in VALID_TRANSITIONS[self.status]
+        current = ComplaintStatus(self.status)
+        new = ComplaintStatus(new_status)
+
+        return new in VALID_TRANSITIONS[current]
 
 
-@dataclass(frozen=True)
 class StatusEvent:
-    complaint_id: str
-    old_status: ComplaintStatus
-    new_status: ComplaintStatus
-    changed_at: datetime
-
-    def __post_init__(self):
-        old = ComplaintStatus(self.old_status)
-        new = ComplaintStatus(self.new_status)
+    def __init__(self, complaint_id, old_status, new_status, changed_at):
+        old = ComplaintStatus(old_status)
+        new = ComplaintStatus(new_status)
 
         if new not in VALID_TRANSITIONS[old]:
             raise ValueError(
                 f"Invalid transition: {old.value} to {new.value}"
             )
 
-        object.__setattr__(self, "old_status", old)
-        object.__setattr__(self, "new_status", new)
+        self.complaint_id = complaint_id
+        self.old_status = old
+        self.new_status = new
+        self.changed_at = changed_at
