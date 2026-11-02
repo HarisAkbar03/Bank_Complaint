@@ -1,7 +1,10 @@
 from datetime import datetime
 from decimal import Decimal
 from enum import Enum
-
+from datetime import datetime
+from sqlalchemy import Integer, String, DateTime, ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column
+from database import Base
 from sqlalchemy import String, Numeric, DateTime, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -92,3 +95,37 @@ class StatusEvent:
         self.old_status = old
         self.new_status = new
         self.changed_at = changed_at
+
+class ComplaintStatusHistory(Base):
+    __tablename__ = "complaint_status_history"
+
+    # Unique identifier for each status change
+    id: Mapped[int] = mapped_column(
+        Integer,
+        primary_key=True,
+        autoincrement=True
+    )
+
+    # Complaint associated with the status change
+    complaint_id: Mapped[str] = mapped_column(
+        ForeignKey("complaint.complaint_id"),
+        nullable=False
+    )
+
+    # Status before the update
+    old_status: Mapped[str] = mapped_column(
+        String,
+        nullable=False
+    )
+
+    # Status after the update
+    new_status: Mapped[str] = mapped_column(
+        String,
+        nullable=False
+    )
+
+    # When the status changed
+    changed_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        nullable=False
+    )
