@@ -39,3 +39,9 @@ class StatusHistoryResponse(BaseModel):
     old_status: str
     new_status: str
     changed_at: datetime
+
+
+class ErrorResponse(BaseModel):
+    code: str
+    message: str
+    correlation_id: str
