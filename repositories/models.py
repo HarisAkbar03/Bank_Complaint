@@ -115,7 +115,7 @@ class ComplaintStatusHistory(Base):
     # Status before the update
     old_status: Mapped[str] = mapped_column(
         String,
-        nullable=False
+        nullable=True
     )
 
     # Status after the update
