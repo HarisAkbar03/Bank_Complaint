@@ -36,7 +36,7 @@ class StatusHistoryResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     complaint_id: str
-    old_status: str
+    old_status: str | None
     new_status: str
     changed_at: datetime
 

@@ -2,9 +2,10 @@ from fastapi import Request, HTTPException
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from sqlalchemy.exc import OperationalError
-
+import logging
 from schemas.errors import ERROR_CODES
 
+import traceback
 
 def error_response(request, status_code, code=None, message=None):
     default_code, default_message = ERROR_CODES.get(
@@ -49,4 +50,12 @@ async def unexpected_exception_handler(
     request: Request,
     exc: Exception
 ):
+    print("\n========== ACTUAL ERROR ==========", flush=True)
+    traceback.print_exception(
+        type(exc),
+        exc,
+        exc.__traceback__
+    )
+    print("==================================\n", flush=True)
+
     return error_response(request, 500)

@@ -151,6 +151,7 @@ def update_complaint_status(
         "new_status": new_status.value,
         "message": "Status updated successfully"
     }
+
 @router.get(
     "/{complaint_id}/history",
     response_model=list[StatusHistoryResponse]

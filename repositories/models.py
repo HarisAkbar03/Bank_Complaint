@@ -17,6 +17,17 @@ class ComplaintStatus(str, Enum):
     RESOLVED = "Resolved"
     CLOSED = "Closed"
 
+    @classmethod
+    def _missing_(cls,value):
+        if isinstance(value,str):
+            normalized = value.strip().casefold()
+
+            for member in cls:
+                if member.value.casefold() == normalized:
+                    return member
+
+        return None
+
 
 class AccountStatus(str, Enum):
     ACTIVE = "Active"
