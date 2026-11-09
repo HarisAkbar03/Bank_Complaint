@@ -1,0 +1,11 @@
+[
+  {
+    "test": "vector_count_matches_chunks"
+  },
+  {
+    "test": "all_vectors_have_source_id"
+  },
+  {
+    "test": "rebuild_has_no_duplicates"
+  }
+]

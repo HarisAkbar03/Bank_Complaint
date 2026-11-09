@@ -1,0 +1,141 @@
+{
+  "mode": "local",
+  "model": "sentence-transformers/all-MiniLM-L6-v2",
+  "input_chunks": 175,
+  "batch_size": 10,
+  "embedding_batches": 18,
+  "inserted_or_updated": 175,
+  "skipped_unchanged": 0,
+  "failed": 0,
+  "duration_seconds": 18.238,
+  "token_usage": null,
+  "batch_metrics": [
+    {
+      "batch_number": 1,
+      "chunk_count": 10,
+      "duration_seconds": 15.661,
+      "status": "success",
+      "api_usage": null
+    },
+    {
+      "batch_number": 2,
+      "chunk_count": 10,
+      "duration_seconds": 0.267,
+      "status": "success",
+      "api_usage": null
+    },
+    {
+      "batch_number": 3,
+      "chunk_count": 10,
+      "duration_seconds": 0.217,
+      "status": "success",
+      "api_usage": null
+    },
+    {
+      "batch_number": 4,
+      "chunk_count": 10,
+      "duration_seconds": 0.166,
+      "status": "success",
+      "api_usage": null
+    },
+    {
+      "batch_number": 5,
+      "chunk_count": 10,
+      "duration_seconds": 0.169,
+      "status": "success",
+      "api_usage": null
+    },
+    {
+      "batch_number": 6,
+      "chunk_count": 10,
+      "duration_seconds": 0.157,
+      "status": "success",
+      "api_usage": null
+    },
+    {
+      "batch_number": 7,
+      "chunk_count": 10,
+      "duration_seconds": 0.163,
+      "status": "success",
+      "api_usage": null
+    },
+    {
+      "batch_number": 8,
+      "chunk_count": 10,
+      "duration_seconds": 0.143,
+      "status": "success",
+      "api_usage": null
+    },
+    {
+      "batch_number": 9,
+      "chunk_count": 10,
+      "duration_seconds": 0.17,
+      "status": "success",
+      "api_usage": null
+    },
+    {
+      "batch_number": 10,
+      "chunk_count": 10,
+      "duration_seconds": 0.168,
+      "status": "success",
+      "api_usage": null
+    },
+    {
+      "batch_number": 11,
+      "chunk_count": 10,
+      "duration_seconds": 0.05,
+      "status": "success",
+      "api_usage": null
+    },
+    {
+      "batch_number": 12,
+      "chunk_count": 10,
+      "duration_seconds": 0.051,
+      "status": "success",
+      "api_usage": null
+    },
+    {
+      "batch_number": 13,
+      "chunk_count": 10,
+      "duration_seconds": 0.047,
+      "status": "success",
+      "api_usage": null
+    },
+    {
+      "batch_number": 14,
+      "chunk_count": 10,
+      "duration_seconds": 0.045,
+      "status": "success",
+      "api_usage": null
+    },
+    {
+      "batch_number": 15,
+      "chunk_count": 10,
+      "duration_seconds": 0.173,
+      "status": "success",
+      "api_usage": null
+    },
+    {
+      "batch_number": 16,
+      "chunk_count": 10,
+      "duration_seconds": 0.097,
+      "status": "success",
+      "api_usage": null
+    },
+    {
+      "batch_number": 17,
+      "chunk_count": 10,
+      "duration_seconds": 0.172,
+      "status": "success",
+      "api_usage": null
+    },
+    {
+      "batch_number": 18,
+      "chunk_count": 5,
+      "duration_seconds": 0.094,
+      "status": "success",
+      "api_usage": null
+    }
+  ],
+  "failures": []
+}

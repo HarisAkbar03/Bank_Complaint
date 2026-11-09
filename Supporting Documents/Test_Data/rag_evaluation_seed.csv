@@ -1,0 +1,7 @@
+case_id,question,expected_supported,expected_source_id,expected_section
+EV-001,What must be recorded at complaint intake?,True,KB-001,4. Intake Standard
+EV-002,When does proposed compensation require supervisor approval?,True,KB-002,3. Financial Redress Thresholds
+EV-003,What triggers immediate specialist escalation?,True,KB-002,4. Specialist Escalation Triggers
+EV-004,Can the assistant promise a fee refund?,True,KB-003,5. Redress and Approval
+EV-005,Can the assistant reset authentication secrets?,True,KB-004,5. Prohibited Behaviors
+EV-006,What is the current weather in Reykjavik?,False,,

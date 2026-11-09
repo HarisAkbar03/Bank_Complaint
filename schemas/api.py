@@ -1,6 +1,27 @@
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field
+from decimal import Decimal
+from pydantic import BaseModel, ConfigDict
 
+
+class EmployeeResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    employee_id: str
+    first_name: str
+    last_name: str
+    email: str
+    role: str
+
+
+class AccountResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    account_id: str
+    customer_id: str
+    account_type: str
+    status: str
+    current_balance: Decimal | None
 
 class CustomerResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)

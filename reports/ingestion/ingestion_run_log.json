@@ -1,0 +1,139 @@
+{
+  "timestamp": "2026-11-06T20:16:59.887718+00:00",
+  "accepted_records": [
+    {
+      "filename": "01_Current_Approved_Policies/KB-001_Enterprise_Complaint_Management_Policy.docx",
+      "source_id": "KB-001",
+      "checksum": "e36cd02d5ca9161a8da428666f386bf51f05579b3d7657ea407f01d88c6f859f",
+      "section_count": 14
+    },
+    {
+      "filename": "01_Current_Approved_Policies/KB-002_Escalation_Approval_and_Decision_Authority_Standard.docx",
+      "source_id": "KB-002",
+      "checksum": "ac281cb6e47c15460cb1789aea38bbd776eb544ea15e63f62197aa787b722bb1",
+      "section_count": 11
+    },
+    {
+      "filename": "02_Operational_Playbooks/KB-003_Fee_Charge_and_Interest_Complaint_Playbook.docx",
+      "source_id": "KB-003",
+      "checksum": "09198c23088a92e7ef08ca9eaccda607cddf939aa7a1e3d0cacc191cc4783d08",
+      "section_count": 11
+    },
+    {
+      "filename": "02_Operational_Playbooks/KB-004_Digital_Banking_and_Account_Access_Operations_Guide.docx",
+      "source_id": "KB-004",
+      "checksum": "3e51238778a5af282dfc2a058f8667423fb5def50c1c7cc1375ffd8bd42b5076",
+      "section_count": 11
+    },
+    {
+      "filename": "01_Current_Approved_Policies/KB-005_Customer_Service_Communication_and_Accessibility_Standard.docx",
+      "source_id": "KB-005",
+      "checksum": "443a7ba261e35adc07d5c034739b35b9a2c53af6043dd7fbdc07e781b04cf1f3",
+      "section_count": 11
+    },
+    {
+      "filename": "02_Operational_Playbooks/KB-006_Mortgage_Servicing_Complaint_Investigation_Playbook.docx",
+      "source_id": "KB-006",
+      "checksum": "d7435c51f6c054c2c2b917b58177b45a0401f9812d1c4da724bbaff4a858f68e",
+      "section_count": 11
+    },
+    {
+      "filename": "02_Operational_Playbooks/KB-007_Complaint_Investigation_and_Resolution_Analyst_Playbook.docx",
+      "source_id": "KB-007",
+      "checksum": "5b59515740e1c7ba6468840fec5fe9847e787516d7d6af8f27bb14fa914b6877",
+      "section_count": 11
+    },
+    {
+      "filename": "01_Current_Approved_Policies/KB-008_AI_Governance_Information_Security_and_Audit_Standard.docx",
+      "source_id": "KB-008",
+      "checksum": "9684735137dcf013b7718ff153497492982c6fc82d1886d1f98e3d7f3dce8536",
+      "section_count": 12
+    },
+    {
+      "filename": "03_Knowledge_Articles_and_FAQ/KB-009_Complaint_Operations_Knowledge_Articles_and_FAQ.docx",
+      "source_id": "KB-009",
+      "checksum": "394c7da327959ec521aae9d6e5bd98acd61e05837c804fdcb078586c83197ac2",
+      "section_count": 52
+    },
+    {
+      "filename": "03_Knowledge_Articles_and_FAQ/KB-010_Historical_Complaint_Casebook.docx",
+      "source_id": "KB-010",
+      "checksum": "6234d8a93bec80d3252ade7a322e8411b9bcf56f7d28ab81c1c18fbc5f1d5103",
+      "section_count": 23
+    },
+    {
+      "filename": "04_Bulletins_and_Versioning/BUL-2026-01_Approval_Threshold_Clarification.docx",
+      "source_id": "BUL-2026-01",
+      "checksum": "e86d93ce2d906d01608b4a7a82e750bbca503ccc30651bce0b53e71cee18cfc3",
+      "section_count": 4
+    },
+    {
+      "filename": "04_Bulletins_and_Versioning/BUL-2026-02_RAG_Source_and_Citation_Controls.docx",
+      "source_id": "BUL-2026-02",
+      "checksum": "9d24de1ef72cc387ece05cffca73853fe09bcb4e2f0d35c65fe0f29e0508a76c",
+      "section_count": 4
+    }
+  ],
+  "rejected_records": [
+    {
+      "filename": "04_Bulletins_and_Versioning/KB-001-OLD_Superseded_Complaint_Handling_Policy.docx",
+      "reason": "Not approved for current retrieval: Superseded"
+    }
+  ],
+  "warnings": [
+    {
+      "filename": "01_Current_Approved_Policies/KB-001_Enterprise_Complaint_Management_Policy.docx",
+      "reason": "Category not supplied in manifest"
+    },
+    {
+      "filename": "01_Current_Approved_Policies/KB-002_Escalation_Approval_and_Decision_Authority_Standard.docx",
+      "reason": "Category not supplied in manifest"
+    },
+    {
+      "filename": "02_Operational_Playbooks/KB-003_Fee_Charge_and_Interest_Complaint_Playbook.docx",
+      "reason": "Category not supplied in manifest"
+    },
+    {
+      "filename": "02_Operational_Playbooks/KB-004_Digital_Banking_and_Account_Access_Operations_Guide.docx",
+      "reason": "Category not supplied in manifest"
+    },
+    {
+      "filename": "01_Current_Approved_Policies/KB-005_Customer_Service_Communication_and_Accessibility_Standard.docx",
+      "reason": "Category not supplied in manifest"
+    },
+    {
+      "filename": "02_Operational_Playbooks/KB-006_Mortgage_Servicing_Complaint_Investigation_Playbook.docx",
+      "reason": "Category not supplied in manifest"
+    },
+    {
+      "filename": "02_Operational_Playbooks/KB-007_Complaint_Investigation_and_Resolution_Analyst_Playbook.docx",
+      "reason": "Category not supplied in manifest"
+    },
+    {
+      "filename": "01_Current_Approved_Policies/KB-008_AI_Governance_Information_Security_and_Audit_Standard.docx",
+      "reason": "Category not supplied in manifest"
+    },
+    {
+      "filename": "03_Knowledge_Articles_and_FAQ/KB-009_Complaint_Operations_Knowledge_Articles_and_FAQ.docx",
+      "reason": "Category not supplied in manifest"
+    },
+    {
+      "filename": "03_Knowledge_Articles_and_FAQ/KB-010_Historical_Complaint_Casebook.docx",
+      "reason": "Category not supplied in manifest"
+    },
+    {
+      "filename": "04_Bulletins_and_Versioning/BUL-2026-01_Approval_Threshold_Clarification.docx",
+      "reason": "Category not supplied in manifest"
+    },
+    {
+      "filename": "04_Bulletins_and_Versioning/BUL-2026-02_RAG_Source_and_Citation_Controls.docx",
+      "reason": "Category not supplied in manifest"
+    }
+  ],
+  "counts": {
+    "accepted": 12,
+    "rejected": 1,
+    "warnings": 12,
+    "sections": 175
+  }
+}

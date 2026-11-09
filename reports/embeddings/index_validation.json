@@ -1,0 +1,9 @@
+{
+  "expected_count": 175,
+  "vector_count": 175,
+  "dimensions": 384,
+  "model": "sentence-transformers/all-MiniLM-L6-v2",
+  "issue_count": 0,
+  "issues": [],
+  "valid": true
+}

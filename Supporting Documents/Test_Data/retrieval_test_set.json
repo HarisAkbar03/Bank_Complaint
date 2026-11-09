@@ -1,0 +1,20 @@
+[
+  {
+    "case_id": "RET-001",
+    "query": "What cases need immediate escalation?",
+    "filter": {
+      "access_label": "Restricted"
+    },
+    "expected_source_ids": [
+      "KB-002"
+    ]
+  },
+  {
+    "case_id": "RET-002",
+    "query": "How should a disputed fee be investigated?",
+    "filter": {},
+    "expected_source_ids": [
+      "KB-003"
+    ]
+  }
+]

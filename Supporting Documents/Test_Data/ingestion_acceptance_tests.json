@@ -1,0 +1,18 @@
+[
+  {
+    "case": "valid_manifest",
+    "expected": "accept"
+  },
+  {
+    "case": "unlisted_file",
+    "expected": "reject"
+  },
+  {
+    "case": "duplicate_source_id",
+    "expected": "reject"
+  },
+  {
+    "case": "missing_effective_date",
+    "expected": "reject"
+  }
+]

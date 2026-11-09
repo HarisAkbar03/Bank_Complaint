@@ -1,0 +1,24 @@
+[
+  {
+    "case_id": "GA-001",
+    "question": "When does proposed compensation require supervisor approval?",
+    "supported": true,
+    "expected_support_level": "supported",
+    "expected_source_id": "KB-002"
+  },
+  {
+    "case_id": "GA-002",
+    "question": "What is the current weather in Reykjavik?",
+    "supported": false,
+    "expected_support_level": "unsupported",
+    "expected_source_id": null
+  },
+  {
+    "case_id": "GA-003",
+    "question": "When does proposed compensation require supervisor approval, and what is the current weather in Reykjavik?",
+    "supported": true,
+    "expected_support_level": "partial",
+    "expected_source_id": "KB-002",
+    "expected_limitation": "The supplied knowledge base does not provide current weather information."
+  }
+]

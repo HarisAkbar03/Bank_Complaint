@@ -1,0 +1,132 @@
+{
+  "corpus_name": "FDM Detailed Banking Complaint RAG Knowledge Base",
+  "synthetic": true,
+  "documents": [
+    {
+      "source_id": "KB-001",
+      "title": "Enterprise Complaint Management Policy",
+      "version": "3.0",
+      "effective_date": "2026-01-01",
+      "access_label": "Internal",
+      "status": "Approved",
+      "path": "01_Current_Approved_Policies/KB-001_Enterprise_Complaint_Management_Policy.docx"
+    },
+    {
+      "source_id": "KB-002",
+      "title": "Escalation, Approval and Decision Authority Standard",
+      "version": "2.1",
+      "effective_date": "2026-02-15",
+      "access_label": "Restricted",
+      "status": "Approved",
+      "path": "01_Current_Approved_Policies/KB-002_Escalation_Approval_and_Decision_Authority_Standard.docx"
+    },
+    {
+      "source_id": "KB-003",
+      "title": "Fee, Charge and Interest Complaint Playbook",
+      "version": "2.0",
+      "effective_date": "2026-03-01",
+      "access_label": "Internal",
+      "status": "Approved",
+      "path": "02_Operational_Playbooks/KB-003_Fee_Charge_and_Interest_Complaint_Playbook.docx"
+    },
+    {
+      "source_id": "KB-004",
+      "title": "Digital Banking and Account Access Operations Guide",
+      "version": "2.0",
+      "effective_date": "2026-03-20",
+      "access_label": "Internal",
+      "status": "Approved",
+      "path": "02_Operational_Playbooks/KB-004_Digital_Banking_and_Account_Access_Operations_Guide.docx"
+    },
+    {
+      "source_id": "KB-005",
+      "title": "Customer Service, Communication and Accessibility Standard",
+      "version": "2.0",
+      "effective_date": "2026-04-01",
+      "access_label": "Internal",
+      "status": "Approved",
+      "path": "01_Current_Approved_Policies/KB-005_Customer_Service_Communication_and_Accessibility_Standard.docx"
+    },
+    {
+      "source_id": "KB-006",
+      "title": "Mortgage Servicing Complaint Investigation Playbook",
+      "version": "2.0",
+      "effective_date": "2026-04-15",
+      "access_label": "Internal",
+      "status": "Approved",
+      "path": "02_Operational_Playbooks/KB-006_Mortgage_Servicing_Complaint_Investigation_Playbook.docx"
+    },
+    {
+      "source_id": "KB-007",
+      "title": "Complaint Investigation and Resolution Analyst Playbook",
+      "version": "2.0",
+      "effective_date": "2026-05-01",
+      "access_label": "Internal",
+      "status": "Approved",
+      "path": "02_Operational_Playbooks/KB-007_Complaint_Investigation_and_Resolution_Analyst_Playbook.docx"
+    },
+    {
+      "source_id": "KB-008",
+      "title": "AI Governance, Information Security and Audit Standard",
+      "version": "2.0",
+      "effective_date": "2026-05-15",
+      "access_label": "Restricted",
+      "status": "Approved",
+      "path": "01_Current_Approved_Policies/KB-008_AI_Governance_Information_Security_and_Audit_Standard.docx"
+    },
+    {
+      "source_id": "KB-009",
+      "title": "Complaint Operations Knowledge Articles and FAQ",
+      "version": "1.0",
+      "effective_date": "2026-06-01",
+      "access_label": "Internal",
+      "status": "Approved",
+      "path": "03_Knowledge_Articles_and_FAQ/KB-009_Complaint_Operations_Knowledge_Articles_and_FAQ.docx"
+    },
+    {
+      "source_id": "KB-010",
+      "title": "Historical Complaint Casebook",
+      "version": "1.0",
+      "effective_date": "2026-06-15",
+      "access_label": "Internal",
+      "status": "Approved",
+      "path": "03_Knowledge_Articles_and_FAQ/KB-010_Historical_Complaint_Casebook.docx"
+    },
+    {
+      "source_id": "BUL-2026-01",
+      "title": "Operational Bulletin: Approval Threshold Clarification",
+      "version": "1.0",
+      "effective_date": "2026-02-20",
+      "access_label": "Internal",
+      "status": "Approved",
+      "path": "04_Bulletins_and_Versioning/BUL-2026-01_Approval_Threshold_Clarification.docx"
+    },
+    {
+      "source_id": "BUL-2026-02",
+      "title": "Operational Bulletin: RAG Source and Citation Controls",
+      "version": "1.0",
+      "effective_date": "2026-05-20",
+      "access_label": "Restricted",
+      "status": "Approved",
+      "path": "04_Bulletins_and_Versioning/BUL-2026-02_RAG_Source_and_Citation_Controls.docx"
+    },
+    {
+      "source_id": "KB-001-OLD",
+      "title": "Superseded Complaint Handling Policy",
+      "version": "1.4",
+      "effective_date": "2024-01-01",
+      "access_label": "Internal",
+      "status": "Superseded",
+      "path": "04_Bulletins_and_Versioning/KB-001-OLD_Superseded_Complaint_Handling_Policy.docx"
+    },
+    {
+      "source_id": "KB-GUIDE",
+      "title": "Knowledge Base Content Map and Retrieval Guide",
+      "version": "1.0",
+      "effective_date": "2026-06-20",
+      "access_label": "Internal",
+      "status": "Approved",
+      "path": "05_Manifests_and_Guides/Knowledge_Base_Content_Map_and_Retrieval_Guide.docx"
+    }
+  ]
+}

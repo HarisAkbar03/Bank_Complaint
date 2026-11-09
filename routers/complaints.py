@@ -1,27 +1,123 @@
+
 from datetime import datetime, timezone
-from uuid import uuid4
+
+from fastapi import (
+    APIRouter,
+    Depends,
+    HTTPException,
+    Query
+)
+
+from pydantic import BaseModel
 from sqlalchemy import select
-from repositories.models import ComplaintStatusHistory
-from schemas.api import StatusUpdate, StatusHistoryResponse
-from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
-from repositories.complaint_repository import ComplaintRepository
-from services.complaint_service import ComplaintService
+
 from dependencies import get_db
-from repositories.models import Customer, Complaint, ComplaintStatus
-from schemas.api import ComplaintCreate, ComplaintResponse
+
+from repositories.models import (
+    Customer,
+    Complaint,
+    ComplaintStatus,
+    ComplaintStatusHistory,
+)
+
+from repositories.complaint_repository import (
+    ComplaintRepository
+)
+
+from services.complaint_service import (
+    ComplaintService
+)
+
+from schemas.api import (
+    ComplaintCreate,
+    ComplaintResponse,
+    StatusUpdate,
+    StatusHistoryResponse,
+)
 
 
-router = APIRouter(prefix="/complaints", tags=["Complaints"])
+router = APIRouter(
+    prefix="/complaints",
+    tags=["Complaints"]
+)
 
 
-@router.get("/{complaint_id}", response_model=ComplaintResponse)
+# ---------------------------------------------
+# REQUEST SCHEMA
+# ---------------------------------------------
+
+class ComplaintUpdate(BaseModel):
+    category: str | None = None
+    channel: str | None = None
+
+
+# ---------------------------------------------
+# GET ALL COMPLAINTS WITH FILTERS
+# ---------------------------------------------
+
+@router.get(
+    "",
+    response_model=list[ComplaintResponse]
+)
+def get_all_complaints(
+    status: str | None = None,
+    category: str | None = None,
+    customer_id: str | None = None,
+    skip: int = Query(default=0, ge=0),
+    limit: int = Query(default=100, ge=1, le=500),
+    db: Session = Depends(get_db)
+):
+    query = select(Complaint)
+
+    if status is not None:
+        try:
+            selected_status = ComplaintStatus(status)
+        except ValueError:
+            raise HTTPException(
+                status_code=422,
+                detail="Invalid complaint status"
+            )
+
+        query = query.where(
+            Complaint.status == selected_status.value
+        )
+
+    if category is not None:
+        query = query.where(
+            Complaint.category == category
+        )
+
+    if customer_id is not None:
+        query = query.where(
+            Complaint.customer_id == customer_id
+        )
+
+    query = (
+        query
+        .order_by(Complaint.received_at.desc())
+        .offset(skip)
+        .limit(limit)
+    )
+
+    complaints = db.scalars(query).all()
+
+    return complaints
+
+
+# ---------------------------------------------
+# GET COMPLAINT BY ID
+# ---------------------------------------------
+
+@router.get(
+    "/{complaint_id}",
+    response_model=ComplaintResponse
+)
 def get_complaint(
     complaint_id: str,
     db: Session = Depends(get_db)
 ):
-
     complaint = db.get(Complaint, complaint_id)
 
     if complaint is None:
@@ -33,61 +129,72 @@ def get_complaint(
     return complaint
 
 
-@router.post("", status_code=201)
+# ---------------------------------------------
+# CREATE COMPLAINT
+# ---------------------------------------------
+
+@router.post(
+    "",
+    status_code=201
+)
 def create_complaint(
     data: ComplaintCreate,
     db: Session = Depends(get_db)
 ):
-    # Check that the customer exists
     if db.get(Customer, data.customer_id) is None:
         raise HTTPException(
             status_code=404,
             detail="Customer not found"
         )
 
-    # Create complaint object
+    existing = db.get(
+        Complaint,
+        data.complaint_id
+    )
+
+    if existing is not None:
+        raise HTTPException(
+            status_code=409,
+            detail="Complaint already exists"
+        )
+
     complaint = Complaint(
         complaint_id=data.complaint_id,
         customer_id=data.customer_id,
         category=data.category,
         channel=data.channel,
         status=ComplaintStatus.OPEN.value,
-        received_at=data.received_at or datetime.now(timezone.utc)
+        received_at=(
+            data.received_at
+            or datetime.now(timezone.utc)
+        )
     )
 
-    # Inject the same session into the repository
     repository = ComplaintRepository(db)
-
-    # Inject the repository into the service
     service = ComplaintService(repository)
 
     try:
-        # Stage both complaint and history
         service.create_complaint(complaint)
 
-        # Execute both INSERTs, but do not commit yet
         db.flush()
-
-        # Commit both writes together
         db.commit()
 
     except ValueError as error:
         db.rollback()
+
         raise HTTPException(
             status_code=409,
             detail=str(error)
         )
 
-    except IntegrityError as error:
+    except IntegrityError:
         db.rollback()
-
-        print("\nDATABASE ERROR:")
-        print(error.orig)
 
         raise HTTPException(
             status_code=409,
             detail="Database constraint violation"
         )
+
     except Exception:
         db.rollback()
         raise
@@ -97,17 +204,91 @@ def create_complaint(
         "complaint_id": complaint.complaint_id
     }
 
-@router.patch("/{complaint_id}/status")
+
+# ---------------------------------------------
+# UPDATE COMPLAINT DETAILS
+# ---------------------------------------------
+
+@router.put(
+    "/{complaint_id}",
+    response_model=ComplaintResponse
+)
+def update_complaint(
+    complaint_id: str,
+    data: ComplaintUpdate,
+    db: Session = Depends(get_db)
+):
+    complaint = db.get(
+        Complaint,
+        complaint_id
+    )
+
+    if complaint is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Complaint not found"
+        )
+
+    changes = data.model_dump(
+        exclude_unset=True
+    )
+
+    if not changes:
+        raise HTTPException(
+            status_code=422,
+            detail="No fields provided for update"
+        )
+
+    if "category" in changes:
+        if not changes["category"]:
+            raise HTTPException(
+                status_code=422,
+                detail="Category cannot be empty"
+            )
+
+        complaint.category = changes["category"]
+
+    if "channel" in changes:
+        if not changes["channel"]:
+            raise HTTPException(
+                status_code=422,
+                detail="Channel cannot be empty"
+            )
+
+        complaint.channel = changes["channel"]
+
+    try:
+        db.commit()
+        db.refresh(complaint)
+
+    except IntegrityError:
+        db.rollback()
+
+        raise HTTPException(
+            status_code=409,
+            detail="Database constraint violation"
+        )
+
+    return complaint
+
+
+# ---------------------------------------------
+# UPDATE COMPLAINT STATUS
+# ---------------------------------------------
+
+@router.patch(
+    "/{complaint_id}/status"
+)
 def update_complaint_status(
     complaint_id: str,
     data: StatusUpdate,
     db: Session = Depends(get_db)
 ):
-
-    # Lock the complaint row during the status change
     complaint = db.scalar(
         select(Complaint)
-        .where(Complaint.complaint_id == complaint_id)
+        .where(
+            Complaint.complaint_id == complaint_id
+        )
         .with_for_update()
     )
 
@@ -118,20 +299,27 @@ def update_complaint_status(
         )
 
     try:
-        new_status = ComplaintStatus(data.status)
+        new_status = ComplaintStatus(
+            data.status
+        )
+
     except ValueError:
         raise HTTPException(
             status_code=422,
             detail="Invalid complaint status"
         )
 
-    if not complaint.can_transition_to(new_status):
+    if not complaint.can_transition_to(
+        new_status
+    ):
         raise HTTPException(
             status_code=409,
             detail="Invalid status transition"
         )
 
-    old_status = ComplaintStatus(complaint.status)
+    old_status = ComplaintStatus(
+        complaint.status
+    )
 
     complaint.status = new_status.value
 
@@ -139,11 +327,22 @@ def update_complaint_status(
         complaint_id=complaint_id,
         old_status=old_status.value,
         new_status=new_status.value,
-        changed_at=datetime.now(timezone.utc)
+        changed_at=datetime.now(
+            timezone.utc
+        )
     )
 
-    db.add(event)
-    db.commit()
+    try:
+        db.add(event)
+        db.commit()
+
+    except IntegrityError:
+        db.rollback()
+
+        raise HTTPException(
+            status_code=409,
+            detail="Database constraint violation"
+        )
 
     return {
         "complaint_id": complaint_id,
@@ -151,6 +350,11 @@ def update_complaint_status(
         "new_status": new_status.value,
         "message": "Status updated successfully"
     }
+
+
+# ---------------------------------------------
+# GET COMPLAINT STATUS HISTORY
+# ---------------------------------------------
 
 @router.get(
     "/{complaint_id}/history",
@@ -160,15 +364,24 @@ def get_status_history(
     complaint_id: str,
     db: Session = Depends(get_db)
 ):
-
-    if db.get(Complaint, complaint_id) is None:
+    if db.get(
+        Complaint,
+        complaint_id
+    ) is None:
         raise HTTPException(
             status_code=404,
             detail="Complaint not found"
         )
 
-    return db.scalars(
+    history = db.scalars(
         select(ComplaintStatusHistory)
-        .where(ComplaintStatusHistory.complaint_id == complaint_id)
-        .order_by(ComplaintStatusHistory.changed_at)
+        .where(
+            ComplaintStatusHistory.complaint_id
+            == complaint_id
+        )
+        .order_by(
+            ComplaintStatusHistory.changed_at
+        )
     ).all()
+
+    return history

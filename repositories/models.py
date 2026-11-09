@@ -8,8 +8,25 @@ from database import Base
 from sqlalchemy import String, Numeric, DateTime, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
 
+from sqlalchemy import String, Text, Integer, DateTime, JSON
+from sqlalchemy.orm import Mapped, mapped_column
+from pgvector.sqlalchemy import Vector
+from datetime import datetime, timezone
 from database import Base
 
+from sqlalchemy import String
+from sqlalchemy.orm import Mapped, mapped_column
+
+class Employee(Base):
+    __tablename__ = "employee"
+
+    employee_id: Mapped[str] = mapped_column(
+        String, primary_key=True
+    )
+    first_name: Mapped[str] = mapped_column(String)
+    last_name: Mapped[str] = mapped_column(String)
+    email: Mapped[str] = mapped_column(String)
+    role: Mapped[str] = mapped_column(String)
 
 class ComplaintStatus(str, Enum):
     OPEN = "Open"
@@ -138,5 +155,49 @@ class ComplaintStatusHistory(Base):
     # When the status changed
     changed_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
+        nullable=False
+    )
+
+class Embedding(Base):
+    __tablename__ = "rag_embeddings"
+
+    chunk_id: Mapped[str] = mapped_column(
+        String,
+        primary_key=True
+    )
+
+    text_hash: Mapped[str] = mapped_column(
+        String(64),
+        nullable=False
+    )
+
+    model: Mapped[str] = mapped_column(
+        String,
+        nullable=False
+    )
+
+    dimensions: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False
+    )
+
+    vector: Mapped[list] = mapped_column(
+        Vector(384),
+        nullable=False
+    )
+
+    chunk_text: Mapped[str] = mapped_column(
+        Text,
+        nullable=False
+    )
+
+    metadata_json: Mapped[dict] = mapped_column(
+        JSON,
+        nullable=False
+    )
+
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc),
         nullable=False
     )

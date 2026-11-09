@@ -1,0 +1,20 @@
+[
+  {
+    "case_id": "CH-001",
+    "query": "When is supervisor approval required?",
+    "expected_source": "KB-002",
+    "expected_section": "3. Financial Redress Thresholds"
+  },
+  {
+    "case_id": "CH-002",
+    "query": "What evidence is needed for a fee complaint?",
+    "expected_source": "KB-003",
+    "expected_section": "2. Required Intake Fields"
+  },
+  {
+    "case_id": "CH-003",
+    "query": "When should suspected account takeover be escalated?",
+    "expected_source": "KB-004",
+    "expected_section": "4. Security Escalation Indicators"
+  }
+]
