@@ -40,3 +40,4 @@ def test_database_unavailable():
     finally:
         # Restore normal database dependency
         app.dependency_overrides.pop(get_db, None)
+        
