@@ -1,0 +1,55 @@
+﻿tool,scenario,error_code_proposed,required_behavior,safe_fallback,automatic_retry,audit_required
+get_customer,Malformed or missing required input,INVALID_INPUT,Reject before service call,Return typed error; no state change,No,Yes
+get_customer,Caller lacks required role or resource access,ACCESS_DENIED,Reject without leaking resource existence,Return generic denial; log attempted access,No,Yes
+get_customer,Downstream dependency unavailable or timed out,DEPENDENCY_UNAVAILABLE,Return controlled error; no fabricated data,Use approved manual workflow if needed,No,Yes
+get_customer,Audit persistence fails,AUDIT_UNAVAILABLE,Fail closed for actions requiring durable audit,Do not claim success; reconcile uncertain outcome,No,Yes
+get_accounts,Malformed or missing required input,INVALID_INPUT,Reject before service call,Return typed error; no state change,No,Yes
+get_accounts,Caller lacks required role or resource access,ACCESS_DENIED,Reject without leaking resource existence,Return generic denial; log attempted access,No,Yes
+get_accounts,Downstream dependency unavailable or timed out,DEPENDENCY_UNAVAILABLE,Return controlled error; no fabricated data,Use approved manual workflow if needed,No,Yes
+get_accounts,Audit persistence fails,AUDIT_UNAVAILABLE,Fail closed for actions requiring durable audit,Do not claim success; reconcile uncertain outcome,No,Yes
+get_complaint,Malformed or missing required input,INVALID_INPUT,Reject before service call,Return typed error; no state change,No,Yes
+get_complaint,Caller lacks required role or resource access,ACCESS_DENIED,Reject without leaking resource existence,Return generic denial; log attempted access,No,Yes
+get_complaint,Downstream dependency unavailable or timed out,DEPENDENCY_UNAVAILABLE,Return controlled error; no fabricated data,Use approved manual workflow if needed,No,Yes
+get_complaint,Audit persistence fails,AUDIT_UNAVAILABLE,Fail closed for actions requiring durable audit,Do not claim success; reconcile uncertain outcome,No,Yes
+search_policy,Malformed or missing required input,INVALID_INPUT,Reject before service call,Return typed error; no state change,No,Yes
+search_policy,Caller lacks required role or resource access,ACCESS_DENIED,Reject without leaking resource existence,Return generic denial; log attempted access,No,Yes
+search_policy,Downstream dependency unavailable or timed out,DEPENDENCY_UNAVAILABLE,Return controlled error; no fabricated data,Use approved manual workflow if needed,No,Yes
+search_policy,Audit persistence fails,AUDIT_UNAVAILABLE,Fail closed for actions requiring durable audit,Do not claim success; reconcile uncertain outcome,No,Yes
+create_case_note,Malformed or missing required input,INVALID_INPUT,Reject before service call,Return typed error; no state change,No,Yes
+create_case_note,Caller lacks required role or resource access,ACCESS_DENIED,Reject without leaking resource existence,Return generic denial; log attempted access,No,Yes
+create_case_note,Downstream dependency unavailable or timed out,DEPENDENCY_UNAVAILABLE,Return controlled error; no fabricated data,Use approved manual workflow if needed,No,Yes
+create_case_note,Audit persistence fails,AUDIT_UNAVAILABLE,Fail closed for actions requiring durable audit,Do not claim success; reconcile uncertain outcome,No,Yes
+request_approval,Malformed or missing required input,INVALID_INPUT,Reject before service call,Return typed error; no state change,No,Yes
+request_approval,Caller lacks required role or resource access,ACCESS_DENIED,Reject without leaking resource existence,Return generic denial; log attempted access,No,Yes
+request_approval,Downstream dependency unavailable or timed out,DEPENDENCY_UNAVAILABLE,Return controlled error; no fabricated data,Use approved manual workflow if needed,No,Yes
+request_approval,Audit persistence fails,AUDIT_UNAVAILABLE,Fail closed for actions requiring durable audit,Do not claim success; reconcile uncertain outcome,No,Yes
+record_approval_decision,Malformed or missing required input,INVALID_INPUT,Reject before service call,Return typed error; no state change,No,Yes
+record_approval_decision,Caller lacks required role or resource access,ACCESS_DENIED,Reject without leaking resource existence,Return generic denial; log attempted access,No,Yes
+record_approval_decision,Downstream dependency unavailable or timed out,DEPENDENCY_UNAVAILABLE,Return controlled error; no fabricated data,Use approved manual workflow if needed,No,Yes
+record_approval_decision,Audit persistence fails,AUDIT_UNAVAILABLE,Fail closed for actions requiring durable audit,Do not claim success; reconcile uncertain outcome,No,Yes
+update_complaint_status,Malformed or missing required input,INVALID_INPUT,Reject before service call,Return typed error; no state change,No,Yes
+update_complaint_status,Caller lacks required role or resource access,ACCESS_DENIED,Reject without leaking resource existence,Return generic denial; log attempted access,No,Yes
+update_complaint_status,Downstream dependency unavailable or timed out,DEPENDENCY_UNAVAILABLE,Return controlled error; no fabricated data,Use approved manual workflow if needed,No,Yes
+update_complaint_status,Audit persistence fails,AUDIT_UNAVAILABLE,Fail closed for actions requiring durable audit,Do not claim success; reconcile uncertain outcome,No,Yes
+close_complaint,Malformed or missing required input,INVALID_INPUT,Reject before service call,Return typed error; no state change,No,Yes
+close_complaint,Caller lacks required role or resource access,ACCESS_DENIED,Reject without leaking resource existence,Return generic denial; log attempted access,No,Yes
+close_complaint,Downstream dependency unavailable or timed out,DEPENDENCY_UNAVAILABLE,Return controlled error; no fabricated data,Use approved manual workflow if needed,No,Yes
+close_complaint,Audit persistence fails,AUDIT_UNAVAILABLE,Fail closed for actions requiring durable audit,Do not claim success; reconcile uncertain outcome,No,Yes
+get_customer,Authorized record not found,NOT_FOUND,Return not_found,Do not invent a record,No,Yes
+get_complaint,Authorized record not found,NOT_FOUND,Return not_found,Do not invent a record,No,Yes
+get_accounts,Customer not verified,CUSTOMER_UNVERIFIED,Deny retrieval,Require trusted verification before retry,No,Yes
+get_accounts,No accounts for verified customer,NOT_FOUND,Return empty authorized result or not_found per API contract,No invented accounts,No,Yes
+get_complaint,Status history missing or unavailable,INCOMPLETE_HISTORY,Do not present incomplete history as complete,Return partial/unavailable only if contract permits,No,Yes
+search_policy,No approved matching evidence,NO_EVIDENCE,Return no evidence,Agent abstains; seek human review when needed,No,Yes
+search_policy,Restricted or stale document detected,POLICY_FILTER_DENIED,Exclude and reject unauthorized evidence,Do not fall back to unapproved versions,No,Yes
+search_policy,top_k out of approved range,INVALID_TOP_K,Reject input,No retrieval,No,Yes
+create_case_note,Secrets or prohibited content in note,CONTENT_REJECTED,Reject before persistence,Request sanitized note,No,Yes
+create_case_note,Write fails or commits ambiguously,WRITE_UNCERTAIN,Do not blindly retry,Reconcile by audit/idempotency key,No,Yes
+request_approval,Missing evidence or invalid proposed action,APPROVAL_INVALID,Reject request,Request complete evidence and permitted action,No,Yes
+request_approval,Duplicate request,DUPLICATE_REQUEST,Check existing request,Return existing request only if authorized and safe,No,Yes
+record_approval_decision,Agent attempts human-only decision,HUMAN_REQUIRED,Reject model invocation,Route to authenticated human supervisor,No,Yes
+record_approval_decision,Stale or already decided approval,APPROVAL_CONFLICT,Reject conflicting decision,Review current approval state,No,Yes
+update_complaint_status,Transition not allowed,INVALID_TRANSITION,Reject before update,Keep original status,No,Yes
+update_complaint_status,Role for transition not defined,ROLE_UNDEFINED,Deny by default,Obtain approved role matrix,No,Yes
+close_complaint,Required evidence or approval missing,CLOSURE_BLOCKED,Reject closure,Keep complaint open for human review,No,Yes
+close_complaint,Unauthorized or non-supervisor closure,ACCESS_DENIED,Reject closure,Route to supervisor,No,Yes

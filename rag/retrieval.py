@@ -3,6 +3,9 @@ import argparse
 import json
 import re
 
+from functools import lru_cache
+from sentence_transformers import CrossEncoder
+
 from pathlib import Path
 
 from rag.embeddings import (
@@ -60,41 +63,72 @@ def lexical_overlap(query, text):
     )
 
 
-def rerank_results(query, matches):
-    """
-    Deterministic fallback reranker.
+@lru_cache(maxsize=1)
+def get_reranker():
+    return CrossEncoder(
+        "cross-encoder/ms-marco-MiniLM-L-6-v2"
+    )
 
-    Original score: pgvector cosine similarity
-    Reranked score: 80% similarity + 20% overlap
-    """
+
+
+def rerank_results(query, matches):
+    if not matches:
+        return []
+
+    reranker = get_reranker()
+
+    pairs = [
+        (
+            query,
+            f"{match['metadata'].get('section_name', '')}\n"
+            f"{match['chunk_text']}"
+        )
+        for match in matches
+    ]
+
+    scores = reranker.predict(pairs)
+
+    semantic_ranked = sorted(
+        range(len(matches)),
+        key=lambda i: matches[i]["similarity"],
+        reverse=True
+    )
+
+    cross_ranked = sorted(
+        range(len(matches)),
+        key=lambda i: float(scores[i]),
+        reverse=True
+    )
+
+    semantic_positions = {
+        idx: rank
+        for rank, idx in enumerate(semantic_ranked, 1)
+    }
+
+    cross_positions = {
+        idx: rank
+        for rank, idx in enumerate(cross_ranked, 1)
+    }
+
     results = []
 
-    for match in matches:
-        original = match["similarity"]
-
-        overlap = lexical_overlap(
-            query,
-            match["chunk_text"]
-        )
-
-        reranked = (
-            0.8 * original
-            + 0.2 * overlap
+    for i, match in enumerate(matches):
+        rrf_score = (
+            1 / (60 + semantic_positions[i])
+            + 1 / (60 + cross_positions[i])
         )
 
         results.append({
             **match,
-            "original_score": original,
-            "reranked_score": reranked,
-            "lexical_overlap": overlap,
+            "original_score": match["similarity"],
+            "reranked_score": float(scores[i]),
+            "rrf_score": rrf_score
         })
 
     return sorted(
         results,
-        key=lambda item: (
-            -item["reranked_score"],
-            item["chunk_id"]
-        )
+        key=lambda item: item["rrf_score"],
+        reverse=True
     )
 
 

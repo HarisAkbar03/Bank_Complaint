@@ -30,7 +30,7 @@ def test_mock_embedding_dimensions():
 
 
 def test_mock_embedding_deterministic():
-    first = mock_embed("Supervisor approval")
+    first = mock_embed("Supervisor approval") #checking consistency should produce same result
     second = mock_embed("Supervisor approval")
 
     assert first == second
@@ -46,8 +46,8 @@ def test_different_text_produces_different_vectors():
 def test_read_chunks(tmp_path):
     path = tmp_path / "chunks.jsonl"
 
-    path.write_text(
-        json.dumps(sample_chunk()) + "\n",
+    path.write_text( #creeates dictionary containing sample chuck data
+        json.dumps(sample_chunk()) + "\n", #dumps convert to json string
         encoding="utf-8"
     )
 
@@ -58,7 +58,7 @@ def test_read_chunks(tmp_path):
 
 
 def test_embedding_pipeline(tmp_path):
-    source = tmp_path / "chunks.jsonl"
+    source = tmp_path / "chunks.jsonl" #Defines the location of the temporary chunks file.
 
     source.write_text(
         json.dumps(sample_chunk()) + "\n",
@@ -66,10 +66,10 @@ def test_embedding_pipeline(tmp_path):
     )
 
     output = tmp_path / "embeddings"
-
+    #This calls the embedding pipeline, which generates and stores vectors.
     log, validation = run(
-        input_path=source,
-        output_dir=output,
+        input_path=source, #input_path=source — tells the pipeline where to read the chunks.
+        output_dir=output, #tells it where to save results.
         batch_size=1
     )
 
@@ -102,7 +102,7 @@ def test_no_duplicate_embeddings(tmp_path):
         batch_size=1
     )
 
-    log, validation = run(
+    log, validation = run(      #Runs the same process again to check whether it detects the existing embedding and skips it.
         input_path=source,
         output_dir=output,
         batch_size=1

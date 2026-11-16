@@ -1,0 +1,170 @@
+{
+  "method": "MiniLM + pgvector",
+  "metric": "Hit@3",
+  "total_cases": 2,
+  "passed": 2,
+  "failed": 0,
+  "hit_rate": 1.0,
+  "results": [
+    {
+      "case_id": "RET-001",
+      "expected_source_ids": [
+        "KB-002"
+      ],
+      "retrieved_source_ids": [
+        "KB-002",
+        "KB-002",
+        "KB-002"
+      ],
+      "hit_at_k": true,
+      "retrieval": {
+        "query": "What cases need immediate escalation?",
+        "top_k": 3,
+        "filters": {
+          "access_label": "Restricted"
+        },
+        "reranking_enabled": false,
+        "candidate_k": 3,
+        "results": [
+          {
+            "rank": 1,
+            "chunk_id": "KB-002-V2.1-S0008-baseline-0001",
+            "text": "Scenario | Correct route | Common wrong interpretation Customer disputes CAD 75,000 transfer | Fraud specialist due to unauthorized-transaction indicator. | Treating CAD 75,000 as compensation request. Analyst proposes CAD 1,000.00 compensation | Normal reviewer process; not above threshold. | Using ≥ rather than > threshold. Analyst proposes CAD 1,000.01 | Supervisor approval. | Rounding down or treating as standard. Analyst proposes CAD 10,000.00 | Supervisor approval; not above senior threshold. | Automatically adding senior escalation. Analyst proposes CAD 10,000.01 | Supervisor plus senior escalation. | Using only one approval. Customer threatens regulator and asks for CAD 50 | Compliance route applies despite low amount. | Using amount as sole escalation factor. Old approval for CAD 500; proposal changed to CAD 1,500 | New supervisor approval required. | Reusing stale approval.",
+            "original_score": 0.406946,
+            "reranked_score": null,
+            "metadata": {
+              "source_id": "KB-002",
+              "version": "2.1",
+              "access_label": "Restricted",
+              "approval_status": "Approved",
+              "checksum": "ac281cb6e47c15460cb1789aea38bbd776eb544ea15e63f62197aa787b722bb1",
+              "section_name": "7. Boundary Examples",
+              "sequence_number": 8,
+              "document_type": "Policy",
+              "parent_section_id": "KB-002-V2.1-CHUNK-0008",
+              "strategy": "baseline"
+            }
+          },
+          {
+            "rank": 2,
+            "chunk_id": "KB-002-V2.1-S0002-baseline-0001",
+            "text": "This standard defines when a complaint remains with an analyst, when supervisor approval is required, and when specialist or senior escalation is mandatory. It separates the amount or impact described by a customer from a proposed bank action. Mentioning a large disputed transaction does not itself authorize compensation, closure or account action.",
+            "original_score": 0.405358,
+            "reranked_score": null,
+            "metadata": {
+              "source_id": "KB-002",
+              "version": "2.1",
+              "access_label": "Restricted",
+              "approval_status": "Approved",
+              "checksum": "ac281cb6e47c15460cb1789aea38bbd776eb544ea15e63f62197aa787b722bb1",
+              "section_name": "1. Purpose",
+              "sequence_number": 2,
+              "document_type": "Policy",
+              "parent_section_id": "KB-002-V2.1-CHUNK-0002",
+              "strategy": "baseline"
+            }
+          },
+          {
+            "rank": 3,
+            "chunk_id": "KB-002-V2.1-S0005-baseline-0001",
+            "text": "Trigger | Specialist route | Immediate constraints | Evidence to capture Unauthorized transaction, stolen card, identity compromise | Fraud specialist | Do not promise reimbursement or disclose sensitive fraud logic. | Transaction identifiers, dates, amount, channel and customer statement. Possible personal-data exposure | Privacy / compliance reviewer | Limit disclosure and preserve incident evidence. | Information involved, discovery time, recipients and actions taken. Legal notice or litigation threat | Legal / compliance reviewer | Do not draft final legal position. | Correspondence reference and relevant history. Regulator correspondence | Compliance reviewer | Preserve attachment/version and audit trail. | Regulator, date, reference and complaint link. Accessibility barrier or accommodation request | Responsible service/human reviewer | Preserve request exactly; do not infer condition. | Requested channel or accommodation and impact. Potential vulnerability expressly described | Human reviewer | Do not diagnose or profile. | Exact customer statement and service impact. Conflicting current policies | Policy owner / compliance | Surface both sources; no automated resolution. | Source IDs, versions and conflicting passages.",
+            "original_score": 0.393319,
+            "reranked_score": null,
+            "metadata": {
+              "source_id": "KB-002",
+              "version": "2.1",
+              "access_label": "Restricted",
+              "approval_status": "Approved",
+              "checksum": "ac281cb6e47c15460cb1789aea38bbd776eb544ea15e63f62197aa787b722bb1",
+              "section_name": "4. Specialist Escalation Triggers",
+              "sequence_number": 5,
+              "document_type": "Policy",
+              "parent_section_id": "KB-002-V2.1-CHUNK-0005",
+              "strategy": "baseline"
+            }
+          }
+        ],
+        "result_count": 3
+      }
+    },
+    {
+      "case_id": "RET-002",
+      "expected_source_ids": [
+        "KB-003"
+      ],
+      "retrieved_source_ids": [
+        "KB-007",
+        "KB-003",
+        "KB-010"
+      ],
+      "hit_at_k": true,
+      "retrieval": {
+        "query": "How should a disputed fee be investigated?",
+        "top_k": 3,
+        "filters": {},
+        "reranking_enabled": false,
+        "candidate_k": 3,
+        "results": [
+          {
+            "rank": 1,
+            "chunk_id": "KB-007-V2.0-S0009-baseline-0001",
+            "text": "Known facts: Routine fee complaint with clear customer/account and current guidance. Required handling: • Retrieve records. • Retrieve relevant policy. • Prepare findings and recommendation. • Use normal review. Expected outcome: Traceable evidence pack. Applicable controls: BR-023, BR-039",
+            "original_score": 0.659339,
+            "reranked_score": null,
+            "metadata": {
+              "source_id": "KB-007",
+              "version": "2.0",
+              "access_label": "Internal",
+              "approval_status": "Approved",
+              "checksum": "5b59515740e1c7ba6468840fec5fe9847e787516d7d6af8f27bb14fa914b6877",
+              "section_name": "ANA-01 — Complete investigation",
+              "sequence_number": 9,
+              "document_type": "Playbook",
+              "parent_section_id": "KB-007-V2.0-CHUNK-0009",
+              "strategy": "baseline"
+            }
+          },
+          {
+            "rank": 2,
+            "chunk_id": "KB-003-V2.0-S0009-baseline-0001",
+            "text": "Known facts: Two identical monthly fees posted on the same day. Required handling: • Retrieve fee records and product context. • Confirm duplication rather than assuming. • Prepare correction recommendation. • Apply approvals if additional compensation proposed. Expected outcome: Evidence-backed recommendation with citations. Applicable controls: BR-006, BR-008, BR-023",
+            "original_score": 0.58422,
+            "reranked_score": null,
+            "metadata": {
+              "source_id": "KB-003",
+              "version": "2.0",
+              "access_label": "Internal",
+              "approval_status": "Approved",
+              "checksum": "09198c23088a92e7ef08ca9eaccda607cddf939aa7a1e3d0cacc191cc4783d08",
+              "section_name": "FEE-01 — Duplicate monthly fee",
+              "sequence_number": 9,
+              "document_type": "Playbook",
+              "parent_section_id": "KB-003-V2.0-CHUNK-0009",
+              "strategy": "baseline"
+            }
+          },
+          {
+            "rank": 3,
+            "chunk_id": "KB-010-V1.0-S0003-baseline-0001",
+            "text": "Known facts: Category: Fees and Charges. A duplicate monthly fee was confirmed in structured transaction history. Required handling: • Validate identity and scope. • Retrieve structured records. • Retrieve current policy evidence. • Document limitations and approval route. Expected outcome: Correct duplicate charge; additional compensation below threshold was reviewed normally. Applicable controls: Evidence matched KB-003; outcome human-approved.",
+            "original_score": 0.571484,
+            "reranked_score": null,
+            "metadata": {
+              "source_id": "KB-010",
+              "version": "1.0",
+              "access_label": "Internal",
+              "approval_status": "Approved",
+              "checksum": "6234d8a93bec80d3252ade7a322e8411b9bcf56f7d28ab81c1c18fbc5f1d5103",
+              "section_name": "HCASE-001 — Duplicate monthly fee",
+              "sequence_number": 3,
+              "document_type": "Casebook",
+              "parent_section_id": "KB-010-V1.0-CHUNK-0003",
+              "strategy": "baseline"
+            }
+          }
+        ],
+        "result_count": 3
+      }
+    }
+  ]
+}

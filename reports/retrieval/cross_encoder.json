@@ -1,0 +1,170 @@
+{
+  "method": "MiniLM + pgvector + lexical reranking",
+  "metric": "Hit@3",
+  "total_cases": 2,
+  "passed": 1,
+  "failed": 1,
+  "hit_rate": 0.5,
+  "results": [
+    {
+      "case_id": "RET-001",
+      "expected_source_ids": [
+        "KB-002"
+      ],
+      "retrieved_source_ids": [
+        "KB-002",
+        "KB-002",
+        "KB-002"
+      ],
+      "hit_at_k": true,
+      "retrieval": {
+        "query": "What cases need immediate escalation?",
+        "top_k": 3,
+        "filters": {
+          "access_label": "Restricted"
+        },
+        "reranking_enabled": true,
+        "candidate_k": 20,
+        "results": [
+          {
+            "rank": 1,
+            "chunk_id": "KB-002-V2.1-S0005-baseline-0001",
+            "text": "Trigger | Specialist route | Immediate constraints | Evidence to capture Unauthorized transaction, stolen card, identity compromise | Fraud specialist | Do not promise reimbursement or disclose sensitive fraud logic. | Transaction identifiers, dates, amount, channel and customer statement. Possible personal-data exposure | Privacy / compliance reviewer | Limit disclosure and preserve incident evidence. | Information involved, discovery time, recipients and actions taken. Legal notice or litigation threat | Legal / compliance reviewer | Do not draft final legal position. | Correspondence reference and relevant history. Regulator correspondence | Compliance reviewer | Preserve attachment/version and audit trail. | Regulator, date, reference and complaint link. Accessibility barrier or accommodation request | Responsible service/human reviewer | Preserve request exactly; do not infer condition. | Requested channel or accommodation and impact. Potential vulnerability expressly described | Human reviewer | Do not diagnose or profile. | Exact customer statement and service impact. Conflicting current policies | Policy owner / compliance | Surface both sources; no automated resolution. | Source IDs, versions and conflicting passages.",
+            "original_score": 0.393319,
+            "reranked_score": -0.739899,
+            "metadata": {
+              "source_id": "KB-002",
+              "version": "2.1",
+              "access_label": "Restricted",
+              "approval_status": "Approved",
+              "checksum": "ac281cb6e47c15460cb1789aea38bbd776eb544ea15e63f62197aa787b722bb1",
+              "section_name": "4. Specialist Escalation Triggers",
+              "sequence_number": 5,
+              "document_type": "Policy",
+              "parent_section_id": "KB-002-V2.1-CHUNK-0005",
+              "strategy": "baseline"
+            }
+          },
+          {
+            "rank": 2,
+            "chunk_id": "KB-002-V2.1-S0002-baseline-0001",
+            "text": "This standard defines when a complaint remains with an analyst, when supervisor approval is required, and when specialist or senior escalation is mandatory. It separates the amount or impact described by a customer from a proposed bank action. Mentioning a large disputed transaction does not itself authorize compensation, closure or account action.",
+            "original_score": 0.405358,
+            "reranked_score": -3.810124,
+            "metadata": {
+              "source_id": "KB-002",
+              "version": "2.1",
+              "access_label": "Restricted",
+              "approval_status": "Approved",
+              "checksum": "ac281cb6e47c15460cb1789aea38bbd776eb544ea15e63f62197aa787b722bb1",
+              "section_name": "1. Purpose",
+              "sequence_number": 2,
+              "document_type": "Policy",
+              "parent_section_id": "KB-002-V2.1-CHUNK-0002",
+              "strategy": "baseline"
+            }
+          },
+          {
+            "rank": 3,
+            "chunk_id": "KB-002-V2.1-S0007-baseline-0001",
+            "text": "• Approve: records scope and authorized parameters. • Reject: records reason and returns case for revision or alternative handling. • Request more information: records missing evidence and leaves action disabled. • Escalate: routes to a higher or specialist authority while preserving prior review. • No response: remains pending; the system does not assume approval.",
+            "original_score": 0.371068,
+            "reranked_score": -3.933703,
+            "metadata": {
+              "source_id": "KB-002",
+              "version": "2.1",
+              "access_label": "Restricted",
+              "approval_status": "Approved",
+              "checksum": "ac281cb6e47c15460cb1789aea38bbd776eb544ea15e63f62197aa787b722bb1",
+              "section_name": "6. Approval Decisions",
+              "sequence_number": 7,
+              "document_type": "Policy",
+              "parent_section_id": "KB-002-V2.1-CHUNK-0007",
+              "strategy": "baseline"
+            }
+          }
+        ],
+        "result_count": 3
+      }
+    },
+    {
+      "case_id": "RET-002",
+      "expected_source_ids": [
+        "KB-003"
+      ],
+      "retrieved_source_ids": [
+        "KB-002",
+        "KB-001",
+        "KB-009"
+      ],
+      "hit_at_k": false,
+      "retrieval": {
+        "query": "How should a disputed fee be investigated?",
+        "top_k": 3,
+        "filters": {},
+        "reranking_enabled": true,
+        "candidate_k": 20,
+        "results": [
+          {
+            "rank": 1,
+            "chunk_id": "KB-002-V2.1-S0002-baseline-0001",
+            "text": "This standard defines when a complaint remains with an analyst, when supervisor approval is required, and when specialist or senior escalation is mandatory. It separates the amount or impact described by a customer from a proposed bank action. Mentioning a large disputed transaction does not itself authorize compensation, closure or account action.",
+            "original_score": 0.477057,
+            "reranked_score": -4.110406,
+            "metadata": {
+              "source_id": "KB-002",
+              "version": "2.1",
+              "access_label": "Restricted",
+              "approval_status": "Approved",
+              "checksum": "ac281cb6e47c15460cb1789aea38bbd776eb544ea15e63f62197aa787b722bb1",
+              "section_name": "1. Purpose",
+              "sequence_number": 2,
+              "document_type": "Policy",
+              "parent_section_id": "KB-002-V2.1-CHUNK-0002",
+              "strategy": "baseline"
+            }
+          },
+          {
+            "rank": 2,
+            "chunk_id": "KB-001-V3.0-S0009-baseline-0001",
+            "text": "• Resolution documentation states the complaint understood, evidence reviewed, approved conclusion, action taken or proposed, any limitations, and next steps. • Policy claims must cite current approved sources. Operational facts must identify approved data-tool evidence. • Communication should be clear, respectful and accessible. It should not overstate certainty, legal authority or system capability. • When evidence is insufficient, explain what is missing and the manual next step rather than producing a likely answer. • Compensation language is prepared only after applicable approval. The amount disputed by a customer is not automatically a compensation recommendation.",
+            "original_score": 0.477396,
+            "reranked_score": -5.140171,
+            "metadata": {
+              "source_id": "KB-001",
+              "version": "3.0",
+              "access_label": "Internal",
+              "approval_status": "Approved",
+              "checksum": "e36cd02d5ca9161a8da428666f386bf51f05579b3d7657ea407f01d88c6f859f",
+              "section_name": "8. Resolution and Communication Standard",
+              "sequence_number": 9,
+              "document_type": "Policy",
+              "parent_section_id": "KB-001-V3.0-CHUNK-0009",
+              "strategy": "baseline"
+            }
+          },
+          {
+            "rank": 3,
+            "chunk_id": "KB-009-V1.0-S0006-baseline-0001",
+            "text": "No. Disputed transaction value and proposed compensation are different concepts. Authoritative reference: KB-002 §3",
+            "original_score": 0.472038,
+            "reranked_score": -5.248859,
+            "metadata": {
+              "source_id": "KB-009",
+              "version": "1.0",
+              "access_label": "Internal",
+              "approval_status": "Approved",
+              "checksum": "394c7da327959ec521aae9d6e5bd98acd61e05837c804fdcb078586c83197ac2",
+              "section_name": "FAQ-004 — Is a disputed amount the same as compensation?",
+              "sequence_number": 6,
+              "document_type": "FAQ",
+              "parent_section_id": "KB-009-V1.0-CHUNK-0006",
+              "strategy": "baseline"
+            }
+          }
+        ],
+        "result_count": 3
+      }
+    }
+  ]
+}

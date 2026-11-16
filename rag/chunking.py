@@ -17,6 +17,7 @@ OUTPUT_DIR = Path("reports/chunking")
 
 # ---------------------------------------------------------
 # JSONL utilities
+# This function reads the JSONL file created during ingestion and converts each line into a Python dictionary so we can process the documents
 # ---------------------------------------------------------
 
 def load_jsonl(path):
@@ -28,7 +29,7 @@ def load_jsonl(path):
                 continue
 
             try:
-                records.append(json.loads(line))
+                records.append(json.loads(line)) #converts JSON text into a Python dictionary.
             except json.JSONDecodeError as error:
                 raise ValueError(
                     f"Invalid JSON on line {line_number}: {error}"
@@ -62,7 +63,7 @@ def make_chunk(record, text, strategy, sequence):
     source = record["source_id"]
     version = record["version"]
     section = record["sequence_number"]
-
+    #Links the chunk to its original section
     chunk["parent_section_id"] = record["chunk_id"]
 
     chunk["chunk_id"] = (
@@ -90,7 +91,7 @@ def fixed_chunk(record, chunk_size=500, overlap=50):
 
     if chunk_size <= 0 or not 0 <= overlap < chunk_size:
         raise ValueError("Require 0 <= overlap < chunk_size")
-
+    #contains the words from the original section
     tokens = words(record.get("chunk_text", ""))
     chunks = []
 
@@ -98,13 +99,13 @@ def fixed_chunk(record, chunk_size=500, overlap=50):
         return chunks
 
     step = chunk_size - overlap
-
+    #This loop takes a window of words from the document.
     for start in range(0, len(tokens), step):
         part = tokens[start:start + chunk_size]
 
         if not part:
             break
-
+    #This loop takes a window of words from the document.
         chunks.append(
             make_chunk(
                 record,
